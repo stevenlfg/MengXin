@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MXFriendsViewController.h
 //  MengXin
 //
 //  Created by stevenlfg on 15/9/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MXFriendsViewController : UIViewController
 
 @end
-
