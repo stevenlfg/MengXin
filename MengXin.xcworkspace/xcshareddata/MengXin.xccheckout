@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>17416099-1436-4D65-87B7-F1B676C4473F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MengXin</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1FB6A1AA0008A644BE926B25EDF60F48AD747C64</key>
+		<string>https://github.com/stevenlfg/MengXin.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MengXin.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1FB6A1AA0008A644BE926B25EDF60F48AD747C64</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/stevenlfg/MengXin.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1FB6A1AA0008A644BE926B25EDF60F48AD747C64</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1FB6A1AA0008A644BE926B25EDF60F48AD747C64</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MengXin</string>
+		</dict>
+	</array>
+</dict>
+</plist>

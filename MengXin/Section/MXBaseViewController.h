@@ -11,6 +11,5 @@
 @interface MXBaseViewController : UIViewController
 @property (nonatomic, strong) NSString *menuTitle;
 @property (nonatomic, strong) UIImage *menuImage;
-@property (nonatomic, strong) NSString *tipImage;
 @property (nonatomic, strong) UIImage *selectedMenuImage;
 @end

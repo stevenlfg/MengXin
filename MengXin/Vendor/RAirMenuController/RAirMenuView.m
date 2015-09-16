@@ -139,16 +139,39 @@
 }
 
 - (void)setSelectedItem:(RMenuItem *)selectedItem {
+    NSLog(@"--------------");
     _selectedItem = selectedItem;
     for(int i = 0; i < [_items count]; i++) {
         RMenuItem *item = [_items objectAtIndex:i];
         if (_selectedItem == item) {
             [item setSelected:YES];
+            
+            
         } else {
             [item setSelected:NO];
         }
     }
 }
+
+//- (void)cancelPoint{
+//    RMenuItem *tempItem = _selectedItem;
+//    for(int i = 0; i < [_items count]; i++) {
+//        RMenuItem *item = [_items objectAtIndex:i];
+//        if (_selectedItem == item) {
+//            AppDelegate *myAppDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//            if (!AppDelegate.isAddTag) {
+//                item.tipImage.image = nil;
+//            }else{
+//                item.tipImage.image = [MXUtils getImageWithName:public_new_message];
+//            }
+//            if (!myAppDelegate.isChatMsg) {
+//                item.tipImage.image = nil;
+//            }else{
+//                item.tipImage.image = [MXUtils getImageWithName:public_new_message];
+//            }
+//        }
+//    }
+//}
 
 - (void)reloadItems {
     if ([self.items count] == 0) {
@@ -167,9 +190,9 @@
             [_viewArray addObject:contentView];
         }
         if (SCREEN_HEIGHT<500) {
-         cellTop =235-179+60*count;
+            cellTop =235-179+60*count;
         }else{
-         cellTop =235-179+70*count;
+            cellTop =235-179+70*count;
         }
         RMenuItem *cell=[_items objectAtIndex:i];
         cell.userInteractionEnabled = YES;
@@ -177,44 +200,45 @@
         cell.top = cellTop;
         cell.width = _menuItemSize.width;
         cell.left=0;
-//        cellTop += _menuItemGap + _menuItemSize.height;
+        //        cellTop += _menuItemGap + _menuItemSize.height;
         [cell setAnchorPoint:CGPointMake(-0.5, 0.5)];
         [cell addTarget:self action:@selector(tabSelected:) forControlEvents:UIControlEventTouchUpInside];
         [contentView addSubview:cell];
     }
+    __weak NSArray *array=_viewArray;
     self.contentView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
-        return _viewArray[pageIndex];
+        return array[pageIndex];
     };
     self.contentView.totalPagesCount = ^NSInteger(void){
-        return _viewArray.count;
+        return array.count;
     };
     self.contentView.TapActionBlock = ^(NSInteger pageIndex){
         NSLog(@"点击了第%d个",pageIndex);
     };
     
-//    for(RMenuItem *cell in _items) {
-//        if ([_items indexOfObject:cell] != 0) {
-//            cell.userInteractionEnabled = YES;
-//            count++;
-//            cell.top = cellTop;
-//            cell.width = _menuItemSize.width;
-//            cell.left=5;
-//            cellTop += _menuItemGap + _menuItemSize.height;
-//            [cell setAnchorPoint:CGPointMake(-0.5, 0.5)];
-//            [cell addTarget:self action:@selector(tabSelected:) forControlEvents:UIControlEventTouchUpInside];
-//            [_contentView addSubview:cell];
-//        }else{
-//            cell.userInteractionEnabled = YES;
-//            count++;
-//            cell.top = cellTop;
-//            cell.width = _menuItemSize.width;
-//            cell.left=5;
-//            cellTop += _menuItemGap + _menuItemSize.height;
-//            [cell setAnchorPoint:CGPointMake(-0.5, 0.5)];
-//            [cell addTarget:self action:@selector(tabSelected:) forControlEvents:UIControlEventTouchUpInside];
-//            [_contentView addSubview:cell];
-//        }
-//    }
+    //    for(RMenuItem *cell in _items) {
+    //        if ([_items indexOfObject:cell] != 0) {
+    //            cell.userInteractionEnabled = YES;
+    //            count++;
+    //            cell.top = cellTop;
+    //            cell.width = _menuItemSize.width;
+    //            cell.left=5;
+    //            cellTop += _menuItemGap + _menuItemSize.height;
+    //            [cell setAnchorPoint:CGPointMake(-0.5, 0.5)];
+    //            [cell addTarget:self action:@selector(tabSelected:) forControlEvents:UIControlEventTouchUpInside];
+    //            [_contentView addSubview:cell];
+    //        }else{
+    //            cell.userInteractionEnabled = YES;
+    //            count++;
+    //            cell.top = cellTop;
+    //            cell.width = _menuItemSize.width;
+    //            cell.left=5;
+    //            cellTop += _menuItemGap + _menuItemSize.height;
+    //            [cell setAnchorPoint:CGPointMake(-0.5, 0.5)];
+    //            [cell addTarget:self action:@selector(tabSelected:) forControlEvents:UIControlEventTouchUpInside];
+    //            [_contentView addSubview:cell];
+    //        }
+    //    }
 }
 
 - (void)setTranslationX:(CGFloat)_translationX animation:(BOOL)animation{
@@ -228,26 +252,28 @@
     }
     float persentage = 1.0 - proprtion;
     float angle = (persentage) * M_PI * 0.9;
-//    NSLog(@"persentage = %f angle = %f",persentage, angle);
+    //    NSLog(@"persentage = %f angle = %f",persentage, angle);
     if (animation) {
         [UIView beginAnimations:@"CellAnimation" context:NULL];
         [UIView setAnimationDuration:0.3];
     }
     CGFloat offsetWidth = 20;
     CGFloat offset = offsetWidth * self.items.count;
-        if (count%4==0) {
-            factor=1;
-        }
-    for(RMenuItem *cell in self.items) {
-        count++;
-        angle *= factor;
-        CATransform3D tranform = CATransform3DIdentity;
-        tranform.m34 = 1.f / 900.f;
-        tranform =  CATransform3DRotate(tranform ,angle, 0, 1, 0);
-        cell.layer.transform = tranform;
-        factor *= 0.9;
-        offset -= offsetWidth;
+    if (count%4==0) {
+        factor=1;
     }
+    //    for(RMenuItem *cell in self.items) {
+    //        count++;
+    //        angle *= factor;
+    //        CATransform3D tranform = CATransform3DIdentity;
+    //        tranform.m34 = 1.f / 900.f;
+    //        tranform =  CATransform3DRotate(tranform ,angle, 0, 1, 0);
+    //        cell.layer.transform = tranform;
+    //        factor *= 0.9;
+    //        offset -= offsetWidth;
+    //    }
+    
+    
     float angleOne = (persentage) * M_PI * 0.9;;
     CATransform3D tranform = CATransform3DIdentity;
     tranform.m34 = 1.f / 900.f;
@@ -260,12 +286,12 @@
 }
 
 - (void)tabSelected:(id)sender {
-	[self.delegate menuView:self didSelectItemAtIndex:[self.items indexOfObject:sender]];
+    [self.delegate menuView:self didSelectItemAtIndex:[self.items indexOfObject:sender]];
 }
 
 - (void)gotoPersonCenter{
     if (self.delegate &&[self.delegate respondsToSelector:@selector(menuViewToPersonCenter)]) {
-         [self.delegate menuViewToPersonCenter];
+        [self.delegate menuViewToPersonCenter];
     }
 }
 -(void)gotoSkinCenter
@@ -276,13 +302,13 @@
 }
 -(void)cycleScrollView:(CycleScrollView *)view isScrolled:(BOOL)isFinished
 {
-    if (isFinished) {
-        _instructions.alpha=1;
-        _instructions.userInteractionEnabled=YES;
-    }else{
-        _instructions.userInteractionEnabled=NO;
-        _instructions.alpha=0.3;
-    }
+    //    if (isFinished) {
+    //        _instructions.alpha=1;
+    //        _instructions.userInteractionEnabled=YES;
+    //    }else{
+    //        _instructions.userInteractionEnabled=NO;
+    //        _instructions.alpha=0.3;
+    //    }
 }
 -(void)cycleScrollView:(CycleScrollView *)view scrollPercentage:(float)percent currentPage:(NSInteger)page isUp:(BOOL)isUp
 {
@@ -291,16 +317,21 @@
         CGRect rect=[view convertRect:[item.superview convertRect:item.frame toView:view] toView:self];
         if (rect.origin.y<view.frame.origin.y+50) {
             if (isUp) {
-              item.hidden=YES;
+                item.hidden=YES;
             }else{
-               item.hidden=NO;
+                item.hidden=NO;
             }
-//            item.alpha=(view.frame.origin.y+50-rect.origin.y)/50.0;
+            //            item.alpha=(view.frame.origin.y+50-rect.origin.y)/50.0;
         }else
         {
-//            item.alpha=1;
+            //            item.alpha=1;
             item.hidden=NO;
         }
+    }
+    if (percent==1) {
+        _instructions.alpha=1.0;
+    }else{
+        _instructions.alpha=0.3;
     }
     if ([self.delegate respondsToSelector:@selector(menuView:scrollPercentage:currentPage:isUp:)]) {
         [self.delegate menuView:self scrollPercentage:percent currentPage:page isUp:isUp];

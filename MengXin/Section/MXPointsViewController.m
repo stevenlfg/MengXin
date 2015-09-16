@@ -1,24 +1,22 @@
 //
-//  MXFriendsViewController.m
+//  MXPointsViewController.m
 //  MengXin
 //
 //  Created by stevenlfg on 15/9/16.
 //  Copyright (c) 2015年 stevenlfg. All rights reserved.
 //
 
-#import "MXFriendsViewController.h"
+#import "MXPointsViewController.h"
 
-@interface MXFriendsViewController ()
+@interface MXPointsViewController ()
 
 @end
 
-@implementation MXFriendsViewController
+@implementation MXPointsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"我的好友";
-
 }
 
 - (void)didReceiveMemoryWarning {

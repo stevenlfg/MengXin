@@ -12,7 +12,7 @@
 {
     
 }
-@property (nonatomic,strong)UITableView *myTableView;
+
 @end
 
 
@@ -22,18 +22,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"冒泡";
-//    _myTableView = ({
-//        UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-//        tableView.backgroundColor = [UIColor clearColor];
-//        tableView.dataSource = self;
-//        tableView.delegate = self;
-//        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        [self.view addSubview:tableView];
-//        [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.equalTo(self.view);
-//        }];
-//        tableView;
-//    });
 }
 
 - (void)didReceiveMemoryWarning {

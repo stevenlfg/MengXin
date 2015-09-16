@@ -17,6 +17,7 @@
 		B05C1D6B1BA91F2E0007390E /* RMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B05C1D641BA91F2E0007390E /* RMenuItem.m */; };
 		B05C1D6D1BA92B0D0007390E /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B05C1D6C1BA92B0D0007390E /* user@2x.png */; };
 		B05C1D701BA92EDD0007390E /* MXMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B05C1D6F1BA92EDD0007390E /* MXMessagesViewController.m */; };
+		B0B6F7751BA9622600732672 /* MXPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B6F7741BA9622600732672 /* MXPointsViewController.m */; };
 		B0E459A91BA9098F007DC2F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E459A81BA9098F007DC2F9 /* main.m */; };
 		B0E459AC1BA9098F007DC2F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E459AB1BA9098F007DC2F9 /* AppDelegate.m */; };
 		B0E459B21BA9098F007DC2F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E459B01BA9098F007DC2F9 /* Main.storyboard */; };
@@ -92,6 +93,8 @@
 		B05C1D6C1BA92B0D0007390E /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
 		B05C1D6E1BA92EDD0007390E /* MXMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXMessagesViewController.h; sourceTree = "<group>"; };
 		B05C1D6F1BA92EDD0007390E /* MXMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXMessagesViewController.m; sourceTree = "<group>"; };
+		B0B6F7731BA9622600732672 /* MXPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXPointsViewController.h; sourceTree = "<group>"; };
+		B0B6F7741BA9622600732672 /* MXPointsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXPointsViewController.m; sourceTree = "<group>"; };
 		B0E459A31BA9098F007DC2F9 /* MengXin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MengXin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0E459A71BA9098F007DC2F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0E459A81BA9098F007DC2F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -311,6 +314,8 @@
 				B0E45A4D1BA919EC007DC2F9 /* MXBaseViewController.m */,
 				B05C1D6E1BA92EDD0007390E /* MXMessagesViewController.h */,
 				B05C1D6F1BA92EDD0007390E /* MXMessagesViewController.m */,
+				B0B6F7731BA9622600732672 /* MXPointsViewController.h */,
+				B0B6F7741BA9622600732672 /* MXPointsViewController.m */,
 			);
 			path = Section;
 			sourceTree = "<group>";
@@ -645,6 +650,7 @@
 				B05C1D701BA92EDD0007390E /* MXMessagesViewController.m in Sources */,
 				B05C1D691BA91F2E0007390E /* RAirMenuController.m in Sources */,
 				B05C1D661BA91F2E0007390E /* UIView+AnchorPoint.m in Sources */,
+				B0B6F7751BA9622600732672 /* MXPointsViewController.m in Sources */,
 				B05C1D681BA91F2E0007390E /* UIViewController+AirMenu.m in Sources */,
 				B0E45A451BA9184B007DC2F9 /* MXFriendsViewController.m in Sources */,
 				B0E45A031BA90D4E007DC2F9 /* EGOImageLoadConnection.m in Sources */,
