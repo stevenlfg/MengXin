@@ -12,4 +12,6 @@
 @property (nonatomic, strong) NSString *menuTitle;
 @property (nonatomic, strong) UIImage *menuImage;
 @property (nonatomic, strong) UIImage *selectedMenuImage;
+@property (nonatomic, strong) UIView *contentView;
+- (void)addSubview:(UIView*)view;
 @end

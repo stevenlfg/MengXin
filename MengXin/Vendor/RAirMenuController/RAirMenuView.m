@@ -49,7 +49,7 @@
     _userBackgroundImageView.userInteractionEnabled = YES;
 //    _userBackgroundImageView.image=[MXUtils getImageWithName:side_pull_default_avatar_shadows];
     _userBackgroundImageView.image = [UIImage imageNamed:@"light_green_side_pull_default_avatar_shadows@2x.png"];
-    _userImageView=[[EGOImageView alloc] initWithFrame:CGRectMake(0.5,0,90,90)];
+    _userImageView=[[EGOImageView alloc] initWithFrame:CGRectMake(0.5,0,90,95)];
     _userImageView.layer.cornerRadius=45;
     _userImageView.layer.masksToBounds=YES;
     _userImageView.userInteractionEnabled = YES;

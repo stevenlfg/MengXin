@@ -32,8 +32,8 @@
     
     //我的好友
     MXFriendsViewController * friends = [[MXFriendsViewController alloc]init];
-    friends.title = @"我的好友";
-    friends.menuTitle = @"我的好友";
+    friends.title = @"好友";
+    friends.menuTitle = @"好友";
     friends.menuImage = [UIImage imageNamed:@"light_green_side_pull_newfriends@2x"];
     friends.selectedMenuImage = [UIImage imageNamed:@"light_green_side_pull_newfriends_highlight@2x.png"];
     UINavigationController *nav1=[[UINavigationController alloc] initWithRootViewController:friends];

@@ -24,6 +24,10 @@
 
     return YES;
 }
+- (void)completionStartAnimationWithOptions:(NSDictionary *)launchOptions
+{
+    [self setUpRootViewController];
+}
 - (void)setUpRootViewController
 {
     MXMenuViewController  *airMenu=[[MXMenuViewController alloc] init];
