@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MXTweetsViewController : UIViewController
+@interface MXTweetsViewController : MXBaseViewController
 
 @end

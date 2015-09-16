@@ -14,16 +14,13 @@
     return nil;
 }
 
-- (NSString *)menuImage {
+- (UIImage *)menuImage {
     return nil;
 }
 
-- (NSString *)selectedMenuImage {
+- (UIImage *)selectedMenuImage {
      return nil;   
 }
 
-- (NSString *)tipImage {
-    return nil;
-}
 
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MXFriendsViewController : UIViewController
+@interface MXFriendsViewController : MXBaseViewController
 
 @end

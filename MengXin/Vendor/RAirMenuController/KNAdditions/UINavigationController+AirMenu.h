@@ -11,7 +11,7 @@
 @interface UINavigationController (AirMenu)
 
 - (NSString *)menuTitle;
-- (NSString *)menuImage;
-- (NSString *)selectedMenuImage;
-- (NSString *)tipImage;
+- (UIImage *)menuImage;
+- (UIImage *)selectedMenuImage;
+
 @end

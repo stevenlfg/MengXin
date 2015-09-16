@@ -13,7 +13,21 @@
 @end
 
 @implementation MXBaseViewController
+- (NSString *)menuTitle {
+    return _menuTitle;
+}
 
+- (NSString *)menuImage {
+    return _menuImage;
+}
+
+- (NSString*)tipImage {
+    return _tipImage;
+}
+
+- (NSString *)selectedMenuImage {
+    return _selectedMenuImage;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -21,7 +35,10 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.view.clipsToBounds=NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.view.layer.cornerRadius=5;
+    self.view.backgroundColor=[UIColor whiteColor];
 }
 
 /*

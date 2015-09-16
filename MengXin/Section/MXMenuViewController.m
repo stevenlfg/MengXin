@@ -7,31 +7,68 @@
 //
 
 #import "MXMenuViewController.h"
-
+#import "MXFriendsViewController.h"
+#import "MXTweetsViewController.h"
+#import "MXSettingViewController.h"
+#import "MXMessagesViewController.h"
 @interface MXMenuViewController ()
 
 @end
 
 @implementation MXMenuViewController
-
+- (void)openMenu
+{
+    [self openMenu:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.layer.cornerRadius=5;
+    self.view.layer.masksToBounds=YES;
+    self.view.backgroundColor=[UIColor blackColor];
     // Do any additional setup after loading the view.
+    self.menuView.backgroundColor = [UIColor whiteColor];
+    self.menuView.layer.contents = (id)[UIImage imageNamed:@"light_green_side_pull_backdrop@2x.png"].CGImage;
+    
+    //我的好友
+    MXFriendsViewController * friends = [[MXFriendsViewController alloc]init];
+    friends.title = @"我的好友";
+    friends.menuTitle = @"我的好友";
+    friends.menuImage = [UIImage imageNamed:@"light_green_side_pull_newfriends@2x"];
+    friends.selectedMenuImage = [UIImage imageNamed:@"light_green_side_pull_newfriends_highlight@2x.png"];
+    UINavigationController *nav1=[[UINavigationController alloc] initWithRootViewController:friends];
+    
+    //我的冒泡
+    MXTweetsViewController *tweets = [[MXTweetsViewController alloc]init];
+    tweets.title = @"冒泡";
+    tweets.menuTitle = @"冒泡";
+    tweets.menuImage = [UIImage imageNamed:@"light_green_side_pull_circle@2x.png"];
+    tweets.selectedMenuImage = [UIImage imageNamed:@"light_green_side_pull_circle_highlight@2x.png"];
+    UINavigationController *nav2 = [[UINavigationController alloc]initWithRootViewController:tweets];
+    
+    //设置
+    MXSettingViewController *setting = [[MXSettingViewController alloc]init];
+    setting.title = @"设置";
+    setting.menuTitle = @"设置";
+    setting.menuImage = [UIImage imageNamed:@"light_green_side_pull_set@2x.png"];
+    setting.selectedMenuImage = [UIImage imageNamed:@"light_green_side_pull_set_highlight@2x.png"];
+    UINavigationController *nav3 = [[UINavigationController alloc]initWithRootViewController:setting];
+    
+    //私信
+    MXMessagesViewController *message = [[MXMessagesViewController alloc]init];
+    message.title = @"私信";
+    message.menuTitle = @"私信";
+    message.menuImage = [UIImage imageNamed:@"light_green_side_pull_chat@2x.png"];
+    message.selectedMenuImage = [UIImage imageNamed:@"light_green_side_pull_chat_highlight@2x.png"];
+    UINavigationController *nav4 = [[UINavigationController alloc]initWithRootViewController:message];
+    
+    self.viewControllers=[NSArray arrayWithObjects:nav1,nav2,nav3,nav4,nil];
+    self.selectedIndex = 1;
+ 
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

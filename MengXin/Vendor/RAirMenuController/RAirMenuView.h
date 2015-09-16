@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGOImageView.h"
 @class CycleScrollView;
 @class RAirMenuView;
 @class RMenuCell;
@@ -25,7 +26,7 @@
 @property(nonatomic,strong) CycleScrollView *contentView;
 @property(nonatomic,strong) UILabel *userName;
 @property(nonatomic,strong) EGOImageView *userImageView;
-@property(nonatomic,weak) id<RAirMenuViewDelegate> delegate;     // weak reference. default is nil
+@property(nonatomic,assign) id<RAirMenuViewDelegate> delegate;     // weak reference. default is nil
 @property(nonatomic,retain) NSArray          *items;
 @property(nonatomic,assign) RMenuItem        *selectedItem; // will show feedback based on mode. default is nil
 @property(nonatomic,assign) CGSize menuItemSize;
@@ -34,7 +35,7 @@
 @property(nonatomic,strong) UIColor *selectedMenuTextColor;
 
 - (void)setTranslationX:(CGFloat)x animation:(BOOL)animation;
-- (void)cancelPoint;
+
 
 @end
 

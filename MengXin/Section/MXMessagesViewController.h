@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MXMessagesViewController : UIViewController
+@interface MXMessagesViewController : MXBaseViewController
 
 @end

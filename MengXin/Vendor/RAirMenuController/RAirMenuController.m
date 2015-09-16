@@ -11,19 +11,13 @@
 #import "UIViewAdditions.h"
 #import "RMenuItem.h"
 #import "UIViewController+AirMenu.h"
-#import "MXPersonCenterViewController.h"
 #import "MXPersonDetailInfoViewController.h"
-#import "MXPersonalizedSkinViewController.h"
-#import "MXAppDelegate.h"
 @interface RAirMenuController() <UIGestureRecognizerDelegate, RAirMenuViewDelegate,UIAlertViewDelegate>
 {
     float _percent;
     BOOL isExceedHalf;
     NSInteger _pageOneSelect;
     NSInteger _pageTwoSelect;
-    UINavigationController *personCenterNav;
-    UINavigationController *skinCenterNav;
-    BOOL isSelect;
 }
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
@@ -39,7 +33,7 @@
     CGFloat                     _translationX;
     UIViewController            *_oldViewController;
     CGFloat                     _activeWidth;
-    CGFloat                     _startX;
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -65,28 +59,16 @@
     _pageTwoSelect=4;
     
 }
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"%@",self.description);
-}
--(void)changeSkin:(NSNotification*)notification
-{
-    self.menuView.layer.contents=(id)[MXUtils getImageWithName:public_all_backdrop].CGImage;
-    [self loadMenuView];
-    [self.menuView setSelectedItem:[self.menuView.items objectAtIndex:_selectedIndex]];
-    // default page
-}
+
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSkin:) name:@"changeSkin" object:nil];
-//    self.view.layer.cornerRadius=5;
-//    self.view.layer.masksToBounds=YES;
+    self.view.layer.cornerRadius=5;
+    self.view.layer.masksToBounds=YES;
     self.view.backgroundColor=[UIColor blackColor];
     CGFloat _topHeight = 44;
     if([[UIDevice currentDevice].systemVersion floatValue] >= 7.0) {
         _topHeight = 64;
     }
+    
     self.menuView = [[RAirMenuView alloc] initWithFrame:self.view.bounds];
     self.menuView.delegate = self;
     [self.view addSubview:self.menuView];
@@ -96,52 +78,52 @@
     _rightCloseButton.frame = CGRectMake(self.view.bounds.size.width - 70, 0, 70, self.view.bounds.size.height);
     [self.view addSubview:_rightCloseButton];
     
-
+    
     self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.contentView.clipsToBounds = NO;
-    #warning 下面的属性设置可影响动画的切换等
-//    self.contentView.layer.ShadowOpacity=0.5;
-//    self.contentView.layer.shadowOffset=CGSizeMake(-5,10);
-//    self.contentView.layer.shadowColor=[UIColor colorWithHex:0x888888].CGColor;
-//    self.contentView.layer.allowsEdgeAntialiasing = YES;
+#warning 下面的属性设置可影响动画的切换等
+    //    self.contentView.layer.ShadowOpacity=0.5;
+    //    self.contentView.layer.shadowOffset=CGSizeMake(-5,10);
+    //    self.contentView.layer.shadowColor=[UIColor colorWithHex:0x888888].CGColor;
+    //    self.contentView.layer.allowsEdgeAntialiasing = YES;
     [self.view addSubview:self.contentView];
     
     self.topView = [[UIView alloc] initWithFrame:CGRectMake(0, -_topHeight, CGRectGetWidth(self.view.bounds), _topHeight)];
-//    self.topView.backgroundColor = [UIColor redColor];
+    //    self.topView.backgroundColor = [UIColor redColor];
     self.topView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.topView];
-
+    
     
     
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleRevealGesture:)];
     _panGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:_panGestureRecognizer];
-
+    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-//    [self.selectedViewController viewWillAppear:animated];
-
+    [super viewWillAppear:animated];
+    //    [self.selectedViewController viewWillAppear:animated];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-//    [self.selectedViewController viewDidAppear:animated];
-	_visible = YES;
+    [super viewDidAppear:animated];
+    //    [self.selectedViewController viewDidAppear:animated];
+    _visible = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-//    [self.selectedViewController viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
+    //    [self.selectedViewController viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-//    [self.selectedViewController viewDidDisappear:animated];
-	_visible = NO;
+    [super viewDidDisappear:animated];
+    //    [self.selectedViewController viewDidDisappear:animated];
+    _visible = NO;
 }
 
 - (void)setBackgroundView:(UIImageView *)backgroundView {
@@ -157,7 +139,7 @@
 - (void)setViewControllers:(NSArray *)viewControllers {
     
     if(_viewControllers != viewControllers) {
-//        _selectedIndex = 0;
+        _selectedIndex = 0;
         
         for(UIViewController *c in _viewControllers) {
             [c removeFromParentViewController];
@@ -165,9 +147,9 @@
         
         _viewControllers = viewControllers;
         
-//        for(UIViewController *c in _viewControllers) {
-//            [self addChildViewController:c];
-//        }
+        //        for(UIViewController *c in _viewControllers) {
+        //            [self addChildViewController:c];
+        //        }
         
         [self loadMenuView];
         // default page
@@ -179,50 +161,24 @@
     NSMutableArray *items = [NSMutableArray array];
     for(UIViewController *viewController in _viewControllers) {
         RMenuItem *item = [[RMenuItem alloc] initWithFrame:CGRectMake(0, 0,_menuWidth,_menuRowHeight)];
-        if ([viewController isKindOfClass:[UINavigationController class]]) {
-           UIViewController *viewController1=[((UINavigationController*)viewController).viewControllers firstObject];
-            if ([viewController1 respondsToSelector:@selector(menuTitle)]) {
-                item.titleLabel.text = [viewController1.menuTitle copy];
-            }
-            if ([viewController1 respondsToSelector:@selector(menuImage)]) {
-                item.imageView.image = [[MXUtils getImageWithName:viewController1.menuImage] copy];
-            }
-            if ([viewController1 respondsToSelector:@selector(selectedMenuImage)]) {
-                item.imageView.highlightedImage = [[MXUtils getImageWithName:viewController1.selectedMenuImage] copy];
-            }
-            if ([viewController1 respondsToSelector:@selector(tipImage)]) {
-//                NSString *tip = [viewController1.tipImage copy];
-                item.tipImage.image = [[MXUtils getImageWithName:viewController1.tipImage] copy];;
-                
-            }
-        }else{
-            if ([viewController respondsToSelector:@selector(menuTitle)]) {
-                item.titleLabel.text = [viewController.menuTitle copy];
-            }
-            if ([viewController respondsToSelector:@selector(menuImage)]) {
-                item.imageView.image = [[MXUtils getImageWithName:viewController.menuImage] copy];
-            }
-            if ([viewController respondsToSelector:@selector(selectedMenuImage)]) {
-                item.imageView.highlightedImage = [[MXUtils getImageWithName:viewController.selectedMenuImage] copy];
-            }
-            if ([viewController respondsToSelector:@selector(tipImage)]) {
-                //                NSString *tip = [viewController1.tipImage copy];
-                item.tipImage.image = [[MXUtils getImageWithName:viewController.tipImage] copy];;
-                
-            }
+        
+        if ([viewController respondsToSelector:@selector(menuTitle)]) {
+            item.titleLabel.text = viewController.menuTitle;
+        }
+        if ([viewController respondsToSelector:@selector(menuImage)]) {
+            item.imageView.image = viewController.menuImage;
+        }
+        if ([viewController respondsToSelector:@selector(selectedMenuImage)]) {
+            item.imageView.highlightedImage = viewController.selectedMenuImage;
         }
         [items addObject:item];
     }
     [self.menuView setItems:items];
-
+    
 }
 
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
-    if (selectedIndex == 0&&!isSelect) {
-        isSelect = YES;
-    }
-    NSLog(@"selectedIndex:%d",selectedIndex);
     [self setSelectedIndex:selectedIndex animation:NO];
     if (selectedIndex>3) {
         _pageTwoSelect = selectedIndex;
@@ -240,14 +196,14 @@
     [self.menuView setSelectedItem:[self.menuView.items objectAtIndex:_selectedIndex]];
     
     UIViewController *vc = [self.viewControllers objectAtIndex:_selectedIndex];
-	if (self.selectedViewController == vc) {
-		if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
-			[(UINavigationController *)self.selectedViewController popToRootViewControllerAnimated:animation];
-		}
+    if (self.selectedViewController == vc) {
+        if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
+            [(UINavigationController *)self.selectedViewController popToRootViewControllerAnimated:animation];
+        }
         self.selectedViewController = vc;
-	} else {
-		self.selectedViewController = vc;
-	}
+    } else {
+        self.selectedViewController = vc;
+    }
     
     [self closeMenu:YES];
     
@@ -255,21 +211,18 @@
 
 
 - (void)setSelectedViewController:(UIViewController *)vc {
-	UIViewController *oldVC = _selectedViewController;
-	if (_selectedViewController != vc) {
-		_selectedViewController = vc;
-
-        for(UIView *v in self.contentView.subviews) {
-            [v removeFromSuperview];
-        }
-        if (/*!self.childViewControllers && */1) {
+    UIViewController *oldVC = _selectedViewController;
+    if (_selectedViewController != vc) {
+        _selectedViewController = vc;
+        
+        if (/*!self.childViewControllers && */_visible) {
             //			[oldVC viewWillDisappear:NO];
             [vc viewWillAppear:NO];
             [oldVC removeFromParentViewController];
-
         }
-        if ([oldVC isKindOfClass:[UINavigationController class]]) {
-            
+        
+        for(UIView *v in self.contentView.subviews) {
+            [v removeFromSuperview];
         }
         vc.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
@@ -279,11 +232,15 @@
         [self.contentView addSubview:vc.view];
         
         if (/*!self.childViewControllers &&*/ _visible) {
-//			[oldVC viewDidDisappear:NO];
-//			[_selectedViewController viewDidAppear:NO];
-		}
-		[self.menuView setSelectedItem:[self.menuView.items objectAtIndex:_selectedIndex]];
-	}
+            //			[oldVC viewDidDisappear:NO];
+            //			[_selectedViewController viewDidAppear:NO];
+        }
+        
+        [self.menuView setSelectedItem:[self.menuView.items objectAtIndex:_selectedIndex]];
+        
+        
+        
+    }
 }
 
 
@@ -299,13 +256,15 @@
     percentage = MAX(percentage, 0);
     percentage = MIN(percentage, 1);
     if(animation) {
-        [UIView animateWithDuration:0.20 animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
             self.topView.bottom =  percentage * self.topView.height;
         }];
     } else {
         self.topView.bottom =  percentage * self.topView.height;
     }
 }
+
+
 
 
 - (void)transformForContentView:(CGFloat)distance animation:(BOOL)animation{
@@ -318,9 +277,6 @@
     
     [self.contentView setAnchorPoint:CGPointMake(0, 0.5)];
     NSLog(@"percentage : %f",percentage);
-    if (percentage>1) {
-        percentage=1;
-    }
     if (!animation) {
         self.contentView.layer.transform = [self
                                             transform3DWithRotation:percentage * coverAngle
@@ -329,7 +285,7 @@
                                             perspective:perspective
                                             ];
     } else {
-        [UIView animateWithDuration:0.20 animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
             self.contentView.layer.transform = [self
                                                 transform3DWithRotation:percentage * coverAngle
                                                 scale:(1 - percentage) * (1 - coverScale) + coverScale
@@ -357,11 +313,6 @@
 
 
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)panGestureRecognizer {
-    
-    
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"MJNIndexStart"] boolValue]) {
-        return NO;
-    }
     CGPoint translation = [panGestureRecognizer translationInView:self.view];
     CGPoint velocity = [panGestureRecognizer velocityInView:self.view];
     
@@ -408,21 +359,19 @@
                 break;
         }
     } else {
-//        CGPoint point = [recognizer locationInView:self.view];
-//        if (CGRectContainsPoint(self.contentView.frame, point)) {
-//            NSLog(@"point: %@", NSStringFromCGPoint(point));
-//            NSLog(@"rect : %@", NSStringFromCGRect(self.contentView.frame));
-//        } else {
-//
-//        }
-
+        //        CGPoint point = [recognizer locationInView:self.view];
+        //        if (CGRectContainsPoint(self.contentView.frame, point)) {
+        //            NSLog(@"point: %@", NSStringFromCGPoint(point));
+        //            NSLog(@"rect : %@", NSStringFromCGRect(self.contentView.frame));
+        //        } else {
+        //
+        //        }
+        
     }
 }
 
 - (void)handleRevealGestureStateBeganWithRecognizer:(UIPanGestureRecognizer *)recognizer
 {
-    CGPoint translation = [recognizer translationInView:self.view];
-    _startX=translation.x;
 }
 
 - (void)handleRevealGestureStateChangedWithRecognizer:(UIPanGestureRecognizer *)recognizer
@@ -434,31 +383,25 @@
     if (translation.x + _translationX<0) {
         return;
     }
-//    [self transformForContentView:translation.x + _translationX animation:NO];
-//    [self transformForMenuView:translation.x + _translationX animation:NO];
-//    [self transformForTopView:translation.x + _translationX animation:NO];
-    if (translation.x-_startX>60) {
-        [self openMenu:YES];
-    }else{
-        [self closeMenu:YES];
-    }
-    
+    [self transformForContentView:translation.x + _translationX animation:NO];
+    [self transformForMenuView:translation.x + _translationX animation:NO];
+    [self transformForTopView:translation.x + _translationX animation:NO];
 }
 
 - (void)handleRevealGestureStateEndedWithRecognizer:(UIPanGestureRecognizer *)recognizer
 {
-//    CGPoint translation = [recognizer translationInView:self.view];
-//    CGFloat threshold = 150;
-//    NSLog(@"translation.x = %f",translation.x);
-//    if(translation.x > threshold) {
-//        // open menu
-//        [self openMenu:YES];
-//    } else if (translation.x < 0) {
-//        // close menu
-//        [self closeMenu:YES];
-//    } else {
-//        [self closeMenu:YES];
-//    }
+    CGPoint translation = [recognizer translationInView:self.view];
+    CGFloat threshold = 150;
+    NSLog(@"translation.x = %f",translation.x);
+    if(translation.x > threshold) {
+        // open menu
+        [self openMenu:YES];
+    } else if (translation.x < 0) {
+        // close menu
+        [self closeMenu:YES];
+    } else {
+        [self closeMenu:YES];
+    }
 }
 
 - (void)handleRevealGestureStateCancelledWithRecognizer:(UIPanGestureRecognizer *)recognizer
@@ -471,40 +414,30 @@
 }
 
 - (void)closeMenu:(BOOL)animation {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.menuView.userInteractionEnabled=NO;
     _menuOpened = NO;
     _translationX = 1;
     [self transformForContentView:0 animation:animation];
     [self transformForMenuView:0 animation:animation];
     [self transformForTopView:0 animation:animation];
-
+    
     self.contentView.userInteractionEnabled = YES;
 }
 
 - (void)openMenu:(BOOL)animation {
-//    self.menuView.userImageView.imageURL=[NSURL URLWithString:[MXUserInfo sharedInstance].avatar];
-//    self.menuView.userName.text=[MXUserInfo sharedInstance].nickname?[MXUserInfo sharedInstance].nickname:@"小苏苏";
-    if (_selectedIndex == 0) {
-        [self.menuView cancelPoint];
-    }
-    if (_selectedIndex == 3) {
-        [self.menuView cancelPoint];
-    }
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
-//    if ([MXUserInfo sharedInstance].isLogin) {
-        self.menuView.userInteractionEnabled=YES;
-        _translationX = _activeWidth;
-        _menuOpened = YES;
-        [self transformForContentView:_translationX animation:animation];
-        [self transformForMenuView:_translationX animation:animation];
-        [self transformForTopView:_translationX animation:animation];
-        
-        self.contentView.userInteractionEnabled = NO;
-//    }else{
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//        [alert show];
-//    }
+    //    if ([MXUserInfo sharedInstance].isLogin) {
+    self.menuView.userInteractionEnabled=YES;
+    _translationX = _activeWidth;
+    _menuOpened = YES;
+    [self transformForContentView:_translationX animation:animation];
+    [self transformForMenuView:_translationX animation:animation];
+    [self transformForTopView:_translationX animation:animation];
+    
+    self.contentView.userInteractionEnabled = NO;
+    //    }else{
+    //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未登录，请先登录！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    //        [alert show];
+    //    }
     
 }
 
@@ -513,8 +446,8 @@
 }
 
 - (void)menuView:(RAirMenuView *)menu didSelectItemAtIndex:(NSInteger)index {
-    
     [self setSelectedIndex:index];
+    
 }
 
 
@@ -531,53 +464,43 @@
     }
 }
 //跳转个人中心
-- (void)menuViewToPersonCenter{
-    if (!personCenterNav)
-    {
-        MXPersonDetailInfoViewController *personCenter = [[MXPersonDetailInfoViewController alloc]init];
-        personCenter.isMenu = YES;
-        personCenterNav=[[UINavigationController alloc]initWithRootViewController:personCenter];
-    }
-    UIViewController *vc = personCenterNav;
-	if (self.selectedViewController == vc) {
-		if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
-			[(UINavigationController *)self.selectedViewController popToRootViewControllerAnimated:NO];
-		}
-	} else {
-		self.selectedViewController = vc;
-	}
-//    if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
-//        UINavigationController *nav=(UINavigationController*)self.selectedViewController;
-//        [nav pushViewController:personCenter animated:NO];
+//- (void)menuViewToPersonCenter{
+//    MXPersonDetailInfoViewController *personCenter = [[MXPersonDetailInfoViewController alloc]init];
+//    personCenter.isMenu = YES;
+//    UINavigationController *personCenterNav = [[UINavigationController alloc]initWithRootViewController:personCenter];
+//    UIViewController *vc = personCenterNav;
+//    if (self.selectedViewController == vc) {
+//        if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
+//            [(UINavigationController *)self.selectedViewController popToRootViewControllerAnimated:NO];
+//        }
+//    } else {
+//        self.selectedViewController = vc;
 //    }
-    [self closeMenu:YES];
-}
+//    
+//    [self closeMenu:YES];
+//}
 //跳转皮肤中心
--(void)menuViewToSkinCenter
-{
-    if (!skinCenterNav) {
-     MXPersonalizedSkinViewController *personCenter = [[MXPersonalizedSkinViewController alloc]init];
-     personCenter.isMenu = YES;
-     skinCenterNav=[[UINavigationController alloc]initWithRootViewController:personCenter];
-    }
-    UIViewController *vc = skinCenterNav;
-    if (self.selectedViewController == vc) {
-        if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
-            [(UINavigationController *)self.selectedViewController popToRootViewControllerAnimated:NO];
-        }
-    } else {
-        self.selectedViewController = vc;
-    }
-//    if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
-//        UINavigationController *nav=(UINavigationController*)self.selectedViewController;
-//        [nav pushViewController:personCenter animated:NO];
+//-(void)menuViewToSkinCenter
+//{
+//    
+//    MXPersonalizedSkinViewController *personCenter = [[MXPersonalizedSkinViewController alloc]init];
+//    personCenter.isMenu = YES;
+//    UINavigationController *personCenterNav = [[UINavigationController alloc]initWithRootViewController:personCenter];
+//    UIViewController *vc = personCenterNav;
+//    if (self.selectedViewController == vc) {
+//        if ([self.selectedViewController isKindOfClass:[UINavigationController class]]) {
+//            [(UINavigationController *)self.selectedViewController popToRootViewControllerAnimated:NO];
+//        }
+//    } else {
+//        self.selectedViewController = vc;
 //    }
-    [self closeMenu:YES];
-}
+//    
+//    [self closeMenu:YES];
+//}
 //滚动的时候 contentView缩进和出来
 -(void)menuView:(RAirMenuView *)menu scrollPercentage:(float)percent currentPage:(NSInteger)page isUp:(BOOL)isUp
 {
-//    [menu.items makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:[NSNumber numberWithBool:NO]];
+    [menu.items makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:[NSNumber numberWithBool:NO]];
     _visible=YES;
     CGFloat distanceThreshold = _activeWidth;
     CGFloat coverAngle = -55.0 / 180.0 * M_PI;
@@ -594,51 +517,51 @@
     if (percent<=0.5) {
         if (isExceedHalf) {
             if (!isUp) {
-                    if (page==0) {
-                        _selectedIndex=_pageOneSelect;
-                    }else
-                    {
-                        _selectedIndex=_pageTwoSelect;
-                    }
-                    UIViewController *vc = [self.viewControllers objectAtIndex:_selectedIndex];
-                    self.selectedViewController = vc;
-                    CATransform3D newTransform=CATransform3DTranslate(transform,percent*SCREEN_WIDTH/2.0,0,0);
-                    self.contentView.layer.transform=newTransform;
-                
-            }else
-            {
-                    if (page==0) {
-                        _selectedIndex=_pageOneSelect;
-                    }else
-                    {
-                        _selectedIndex=_pageTwoSelect;
-                    }
-                    self.contentView.layer.transform = [self
-                                                        transform3DWithRotation:0
-                                                        scale:1
-                                                        translationX:0
-                                                        perspective:perspective
-                                                        ];
-                    UIViewController *vc = [self.viewControllers objectAtIndex:_selectedIndex];
-                    self.selectedViewController = vc;
-                    CATransform3D newTransform=CATransform3DTranslate(transform,percent*SCREEN_WIDTH/2.0,0,0);
-                    self.contentView.layer.transform=newTransform;
-                
-            }
-        }else{
                 if (page==0) {
                     _selectedIndex=_pageOneSelect;
                 }else
                 {
                     _selectedIndex=_pageTwoSelect;
                 }
+                UIViewController *vc = [self.viewControllers objectAtIndex:_selectedIndex];
+                self.selectedViewController = vc;
                 CATransform3D newTransform=CATransform3DTranslate(transform,percent*SCREEN_WIDTH/2.0,0,0);
                 self.contentView.layer.transform=newTransform;
+                
+            }else
+            {
+                if (page==0) {
+                    _selectedIndex=_pageOneSelect;
+                }else
+                {
+                    _selectedIndex=_pageTwoSelect;
+                }
+                self.contentView.layer.transform = [self
+                                                    transform3DWithRotation:0
+                                                    scale:1
+                                                    translationX:0
+                                                    perspective:perspective
+                                                    ];
+                UIViewController *vc = [self.viewControllers objectAtIndex:_selectedIndex];
+                self.selectedViewController = vc;
+                CATransform3D newTransform=CATransform3DTranslate(transform,percent*SCREEN_WIDTH/2.0,0,0);
+                self.contentView.layer.transform=newTransform;
+                
+            }
+        }else{
+            if (page==0) {
+                _selectedIndex=_pageOneSelect;
+            }else
+            {
+                _selectedIndex=_pageTwoSelect;
+            }
+            CATransform3D newTransform=CATransform3DTranslate(transform,percent*SCREEN_WIDTH/2.0,0,0);
+            self.contentView.layer.transform=newTransform;
         }
         [self transformForMenuView:_activeWidth animation:NO];
         self.contentView.userInteractionEnabled = NO;
     }else if (percent<1){
-            isExceedHalf=YES;
+        isExceedHalf=YES;
         if (!isUp) {
             if (page==0) {
                 _selectedIndex=_pageOneSelect;
@@ -653,22 +576,22 @@
             {
                 _selectedIndex=_pageTwoSelect;
             }
-            }
-            [self transformForMenuView:_activeWidth animation:NO];
-            self.contentView.userInteractionEnabled = NO;
-            self.contentView.layer.transform = [self
+        }
+        [self transformForMenuView:_activeWidth animation:NO];
+        self.contentView.userInteractionEnabled = NO;
+        self.contentView.layer.transform = [self
                                             transform3DWithRotation:0
                                             scale:1
                                             translationX:0
                                             perspective:perspective
                                             ];
-            UIViewController *vc = [self.viewControllers objectAtIndex:_selectedIndex];
-            self.selectedViewController = vc;
-            CATransform3D newTransform=CATransform3DTranslate(transform,SCREEN_WIDTH/4-(percent-0.5)*SCREEN_WIDTH/2.0,0,0);
-            self.contentView.layer.transform=newTransform;
+        UIViewController *vc = [self.viewControllers objectAtIndex:_selectedIndex];
+        self.selectedViewController = vc;
+        CATransform3D newTransform=CATransform3DTranslate(transform,SCREEN_WIDTH/4-(percent-0.5)*SCREEN_WIDTH/2.0,0,0);
+        self.contentView.layer.transform=newTransform;
     }else if (percent==1) {
         isExceedHalf=NO;
-//        [menu.items makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:[NSNumber numberWithBool:YES]];
+        [menu.items makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:[NSNumber numberWithBool:YES]];
     }
     _percent=percent;
 }

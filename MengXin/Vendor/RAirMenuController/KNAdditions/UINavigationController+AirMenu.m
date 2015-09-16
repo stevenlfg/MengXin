@@ -19,28 +19,20 @@
     return menuTitle;
 }
 
-- (NSString *)menuImage {
-    NSString *menuImage = nil;
+- (UIImage *)menuImage {
+    UIImage *menuImage = nil;
     if([self.topViewController respondsToSelector:@selector(menuImage)]) {
         menuImage = [self.topViewController menuImage];
     }
     return menuImage;
 }
 
-- (NSString *)selectedMenuImage {
-    NSString *selectedMenuImage = nil;
+- (UIImage *)selectedMenuImage {
+    UIImage *selectedMenuImage = nil;
     if([self.topViewController respondsToSelector:@selector(selectedMenuImage)]) {
         selectedMenuImage = [self.topViewController selectedMenuImage];
     }
     return selectedMenuImage;
-}
-
-- (NSString *)tipImage {
-    NSString *tipImage = nil;
-    if([self.topViewController respondsToSelector:@selector(tipImage)]) {
-        tipImage = [self.topViewController tipImage];
-    }
-    return tipImage;
 }
 
 @end

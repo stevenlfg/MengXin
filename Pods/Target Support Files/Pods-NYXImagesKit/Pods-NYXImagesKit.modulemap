@@ -1,0 +1,6 @@
+framework module NYXImagesKit {
+  umbrella header "Pods-NYXImagesKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

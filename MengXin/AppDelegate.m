@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "MXMenuViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,7 +17,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self customizeInterface];
+    [self setUpRootViewController];
+    [self.window makeKeyAndVisible];
+
     return YES;
+}
+- (void)setUpRootViewController
+{
+    MXMenuViewController  *airMenu=[[MXMenuViewController alloc] init];
+    self.window.rootViewController=airMenu;
+}
+- (void)customizeInterface {
+    //设置Nav的背景色和title色
+    
+    UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
+    [navigationBarAppearance setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"0x8dcf6e"]] forBarMetrics:UIBarMetricsDefault];
+    [navigationBarAppearance setTintColor:[UIColor whiteColor]];//返回按钮的箭头颜色
+    NSDictionary *textAttributes = @{
+                                     NSFontAttributeName: [UIFont boldSystemFontOfSize:19],
+                                     NSForegroundColorAttributeName: [UIColor whiteColor],
+                                     };
+    [navigationBarAppearance setTitleTextAttributes:textAttributes];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

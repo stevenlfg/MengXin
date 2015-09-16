@@ -49,7 +49,6 @@
     [sourceImage drawInRect:CGRectMake(0, 0, ceilf(targetWidth), ceilf(targetHeight))];
     newImage = UIGraphicsGetImageFromCurrentImageContext();
     if(newImage == nil){
-        DebugLog(@"could not scale image");
         newImage = sourceImage;
     }
     UIGraphicsEndImageContext();

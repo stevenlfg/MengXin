@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MXSettingViewController : UIViewController
+@interface MXSettingViewController : MXBaseViewController
 
 @end

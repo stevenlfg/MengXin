@@ -12,9 +12,8 @@
 @interface RMenuItem : UIControl
 
 @property(nonatomic,strong) UILabel *titleLabel;
-@property(nonatomic,strong) UIImageView *tipImage;
 @property(nonatomic,copy)   NSString *badgeValue;
 @property(nonatomic,strong) UIImageView *imageView;
 @property(nonatomic,strong) UIView *contentView;
-@property(nonatomic,strong) UIView *backgroundView;
+
 @end
