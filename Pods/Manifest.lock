@@ -20,28 +20,12 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Box (1.2.2)
   - FLAnimatedImage (1.0.8)
   - Masonry (0.6.2)
   - MBProgressHUD (0.9.1)
   - MJExtension (2.5.10)
-  - MJRefresh (2.4.10)
   - NYXImagesKit (2.3)
   - pop (1.0.7)
-  - ReactiveCocoa (3.0.0):
-    - ReactiveCocoa/UI (= 3.0.0)
-    - Result (~> 0.4.1)
-  - ReactiveCocoa/Core (3.0.0):
-    - ReactiveCocoa/no-arc
-    - Result (~> 0.4.1)
-  - ReactiveCocoa/no-arc (3.0.0):
-    - Result (~> 0.4.1)
-  - ReactiveCocoa/UI (3.0.0):
-    - ReactiveCocoa/Core
-    - Result (~> 0.4.1)
-  - Result (0.4.4):
-    - Box (~> 1.2)
-  - TTTAttributedLabel (1.13.4)
 
 DEPENDENCIES:
   - AFNetworking
@@ -49,24 +33,16 @@ DEPENDENCIES:
   - Masonry
   - MBProgressHUD (~> 0.9.1)
   - MJExtension
-  - MJRefresh
   - NYXImagesKit (= 2.3)
   - pop
-  - ReactiveCocoa
-  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
-  Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   FLAnimatedImage: f9422f796135aff80d8c00b2afc48015bb746e24
   Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MJExtension: 944fb5a12bceb9b866914527f66101566e66292b
-  MJRefresh: e52328552ed9cbfce3501e3820b18bf7643c65cc
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
-  ReactiveCocoa: 5c4710e2f00f69f39a7f135d1f3ab48f8dace034
-  Result: b44f6bc8762bbffaf2c5df58f2c7d12c3496ced8
-  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
-COCOAPODS: 0.36.1
+COCOAPODS: 0.38.2

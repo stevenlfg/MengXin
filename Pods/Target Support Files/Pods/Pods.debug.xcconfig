@@ -1,9 +1,8 @@
-FRAMEWORK_SEARCH_PATHS = "$PODS_FRAMEWORK_BUILD_PATH"
+CLANG_CXX_LANGUAGE_STANDARD = c++11
+CLANG_CXX_LIBRARY = libc++
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$PODS_FRAMEWORK_BUILD_PATH/AFNetworking.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/Box.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/FLAnimatedImage.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/MBProgressHUD.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/MJExtension.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/MJRefresh.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/Masonry.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/NYXImagesKit.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/ReactiveCocoa.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/Result.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/TTTAttributedLabel.framework/Headers" -iquote "$PODS_FRAMEWORK_BUILD_PATH/pop.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -ObjC -framework "AFNetworking" -framework "Box" -framework "FLAnimatedImage" -framework "MBProgressHUD" -framework "MJExtension" -framework "MJRefresh" -framework "Masonry" -framework "NYXImagesKit" -framework "ReactiveCocoa" -framework "Result" -framework "TTTAttributedLabel" -framework "pop"
-OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
-OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/AFNetworking.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/FLAnimatedImage.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/MBProgressHUD.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/MJExtension.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Masonry.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/NYXImagesKit.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/pop.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "AFNetworking" -framework "FLAnimatedImage" -framework "MBProgressHUD" -framework "MJExtension" -framework "Masonry" -framework "NYXImagesKit" -framework "pop"
 PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods
 PODS_ROOT = ${SRCROOT}/Pods
