@@ -21,9 +21,10 @@
     self.view.layer.cornerRadius=5;
     self.view.backgroundColor=[UIColor whiteColor];
     _contentView=[[UIView alloc] initWithFrame:self.view.bounds];
-    _contentView.backgroundColor=[UIColor clearColor];
+    _contentView.backgroundColor=[UIColor whiteColor];
     _contentView.clipsToBounds=NO;
     [self.view addSubview:_contentView];
+    
 }
 -(void)addSubview:(UIView*)view
 {

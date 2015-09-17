@@ -5,6 +5,7 @@
 //  Created by stevenlfg on 15/9/16.
 //  Copyright (c) 2015年 stevenlfg. All rights reserved.
 //
+#define kCellIdentifier_UserCell @"UserCell"
 
 #import <UIKit/UIKit.h>
 

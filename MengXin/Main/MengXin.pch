@@ -17,6 +17,9 @@
 #import <CoreData/CoreData.h>
 #import "UIColor+expanded.h"
 #import "UIImage+Common.h"
+#import "UIBarButtonItem+Common.h"
+#import "NSObject+Common.h"
+#import "NSString+Common.h"
 #import "MXBaseViewController.h"
 #import <Masonry/Masonry.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>

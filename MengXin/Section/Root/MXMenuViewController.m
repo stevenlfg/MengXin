@@ -26,6 +26,8 @@
     self.view.layer.cornerRadius=5;
     self.view.layer.masksToBounds=YES;
     self.view.backgroundColor=[UIColor blackColor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openMenu) name:@"openMenu" object:nil];
+
     // Do any additional setup after loading the view.
     self.menuView.backgroundColor = [UIColor whiteColor];
     self.menuView.layer.contents = (id)[UIImage imageNamed:@"light_green_side_pull_backdrop@2x.png"].CGImage;
@@ -73,7 +75,7 @@
     
     
     self.viewControllers=[NSArray arrayWithObjects:nav1,nav2,nav3,nav4,nav5,nil];
-    self.selectedIndex = 1;
+    self.selectedIndex = 0;
  
     [self.view insertSubview:self.topView atIndex:0];
     [self.topView addSubview:nav5.view];
